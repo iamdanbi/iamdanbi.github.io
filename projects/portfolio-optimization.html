@@ -11,49 +11,55 @@
 <body>
 <nav>
   <a href="../index.html">Home</a>
-  <a href="../index.html#projects" class="active">Projects</a>
+  <a href="../index.html" class="active">Projects</a>
 </nav>
 <div class="detail-main">
   <a class="back-link" href="../index.html">← Projects</a>
   <div class="detail-meta">
     <span class="detail-date">2025</span>
-    <span class="tag">Python</span><span class="tag">cvxpy</span><span class="tag">Convex Optimization</span><span class="tag">Portfolio Theory</span>
+    <span class="tag">Python</span><span class="tag">cvxpy</span><span class="tag">NumPy</span><span class="tag">Convex Optimization</span><span class="tag">Portfolio Theory</span>
   </div>
   <h1 class="detail-title">Portfolio Optimization via Convex Programming</h1>
   <hr class="detail-divider" />
 
   <h2 class="detail-h2">Overview</h2>
-  <p class="detail-p">This project applies convex optimization techniques — studied in KAIST's <em>Convex Optimization Techniques</em> course (2025, A0) — to the classical problem of portfolio construction. The goal is to find weight allocations across assets that optimize a risk-adjusted objective under realistic constraints.</p>
-  <p class="detail-p">Two formulations are implemented: mean-variance optimization (Markowitz) and CVaR (Conditional Value-at-Risk) minimization, which is more robust to heavy-tailed return distributions.</p>
+  <p class="detail-p">A project from KAIST's <em>Convex Optimization Techniques</em> (EE523, 2025, A0) applying equality-constrained least squares to Markowitz portfolio optimization. Given historical return data for the Magnificent 7 stocks, the goal is to find allocation weights that minimize return variance subject to a target return and budget constraint.</p>
 
   <hr class="detail-divider" />
   <h2 class="detail-h2">Problem Formulation</h2>
-  <p class="detail-p">The mean-variance problem:</p>
-  <pre style="font-family:var(--mono);font-size:0.75rem;background:#f8f8f8;border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.3rem;line-height:1.6;overflow-x:auto;margin:1rem 0;">minimize    w' Σ w
-subject to  μ' w ≥ r_target
-            1' w = 1
-            w ≥ 0               (long-only)
-            ‖w‖₁ ≤ L            (leverage constraint)</pre>
-  <p class="detail-p">where <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">w ∈ ℝⁿ</code> are portfolio weights, <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">Σ</code> is the covariance matrix, and <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">μ</code> is the expected return vector. The efficient frontier is traced by varying the target return.</p>
+  <p class="detail-p">Following Markowitz (1953), portfolio optimization balances two competing goals: maximizing return and minimizing risk (variance of returns). With allocation weights <em>w ∈ ℝⁿ</em> and a per-period return matrix <em>R ∈ ℝᵀˣⁿ</em>, the problem is formulated as equality-constrained LS:</p>
+
+  <pre style="font-family:var(--mono);font-size:0.75rem;background:#f8f8f8;border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.3rem;line-height:1.7;overflow-x:auto;margin:1rem 0;">min  ‖Rw − ρ·1_T‖²
+ w
+
+subject to  [1_T^T · R] w = [T·ρ]
+            [  1_n^T  ]       [ 1 ]</pre>
+
+  <p class="detail-p">where <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">ρ</code> is the target average per-period return and the two constraints enforce (1) the target total return and (2) the budget constraint <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">1ᵀw = 1</code>. Allocation weights can be negative, corresponding to short positions.</p>
 
   <hr class="detail-divider" />
-  <h2 class="detail-h2">What's Implemented</h2>
-  <ul style="list-style:none;font-size:0.92rem;color:#222;line-height:1.8;">
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> Efficient frontier construction across a range of target returns</li>
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> CVaR (expected shortfall) minimization as an alternative risk measure</li>
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> Factor exposure constraints (sector neutrality, beta bounds)</li>
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> Transaction cost penalty via L1 turnover regularization</li>
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> Covariance shrinkage using the Ledoit-Wolf estimator</li>
-    <li style="padding-left:1rem;position:relative;"><span style="position:absolute;left:0;color:var(--muted);">—</span> Backtesting on historical S&amp;P 500 constituent data</li>
-  </ul>
+  <h2 class="detail-h2">Closed-Form Solution via KKT</h2>
+  <p class="detail-p">The KKT conditions yield a closed-form solution. Introducing Lagrange multipliers <em>z ∈ ℝ²</em>, the optimal weights are obtained by solving a linear system:</p>
+
+  <pre style="font-family:var(--mono);font-size:0.75rem;background:#f8f8f8;border:1px solid var(--border);border-radius:3px;padding:1.1rem 1.3rem;line-height:1.7;overflow-x:auto;margin:1rem 0;">[w*]   [2RᵀR    Rᵀ1_T   1_n]⁻¹   [2ρRᵀ1_T]
+[ z ] = [1_Tᵀ R    0       0  ]   ·  [ T·ρ   ]
+        [1_nᵀ      0       0  ]       [  1    ]</pre>
+
+  <p class="detail-p">This is implemented directly in NumPy — no iterative solver needed. The annualized risk is then computed as <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">√250 · std(Rw*)</code>, assuming 250 trading days per year.</p>
+
+  <hr class="detail-divider" />
+  <h2 class="detail-h2">Data & Experiment</h2>
+  <p class="detail-p">Using closing price data for the Magnificent 7 (AAPL, AMZN, GOOGL, META, MSFT, NVDA, TSLA) from May 2020 to May 2025 via <code style="font-family:var(--mono);font-size:0.8rem;background:#f5f5f5;padding:.1em .3em;border-radius:2px;">yfinance</code>. The efficient frontier is traced across four target annualized returns: 10%, 20%, 40%, and 80%. Results are compared against the naïve equal-weight (1/n) benchmark.</p>
+
+  <p class="detail-p">Key finding: at a similar risk level (~0.30 annualized), the optimized portfolio achieves a meaningfully higher annualized return than the equal-weight rule — consistent with Markowitz's theoretical result. Higher-return targets require significantly elevated leverage (L > 1), implying short positions.</p>
 
   <hr class="detail-divider" />
   <h2 class="detail-h2">Code</h2>
-  <a class="bookmark" href="https://github.com/Danbi-Kim-0624" target="_blank">
+  <a class="bookmark" href="https://github.com/iamdanbi/Portfolio_Optimization" target="_blank">
     <span class="bookmark-icon">⌥</span>
     <div class="bookmark-body">
       <div class="bookmark-title">github.com/Danbi-Kim-0624</div>
-      <div class="bookmark-url">Full implementation with data pipeline, optimization, and backtesting notebooks</div>
+      <div class="bookmark-url">Jupyter notebook — data pipeline, KKT solver, efficient frontier plot, portfolio value evolution</div>
     </div>
   </a>
 </div>
