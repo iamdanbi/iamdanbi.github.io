@@ -4,16 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Danbi Kim</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <nav>
   <a href="#" class="active" onclick="show('home',this);return false;">Home</a>
-  <a href="#" onclick="show('projects',this);return false;">Projects</a>
+  <a href="#" data-page-link="academics" onclick="show('academics',this);return false;">Academics</a>
+  <a href="#" data-page-link="whoami" onclick="show('whoami',this);return false;">Who am I?</a>
 </nav> 
 
 <main>
@@ -22,174 +20,127 @@
   <div id="home" class="page active">
 
     <div class="name-header">
-      <h1 class="home-name">Danbi Kim <span class="phonetic">/ˈdɑn.bi kim/</span></h1>
+      <h1 class="home-name">Danbi Kim</h1>
+      <p class="phonetic">/'dan.bi kim/</p>
     </div>
 
-    <div class="intro-wrapper">
-      <!-- 사진 경로: assets/images/ 폴더에 파일 넣고 src만 교체하세요 -->
-      <img class="intro-photo" src="assets/images/profile.jpeg" alt="Danbi Kim" />
+    <div class="home-collage" aria-label="Danbi Kim homepage illustration">
+      <a class="thought-link" href="#" onclick="show('whoami', document.querySelector('[data-page-link=whoami]'));return false;">
+        <img src="assets/images/Inside_thoughts.png" alt="" />
+        <span>Who Am I?</span>
+      </a>
 
-      <div class="intro-text">
-        <p>Hello, I am <em>Danbi Kim</em>.</p>
-        <p>
-          Mathematically trained researcher with a dual degree in Mathematics and
-          Aerospace Engineering from <a href="https://www.kaist.ac.kr/en/" target="_blank">KAIST</a>.
-          Currently on leave from an M.S. program to pursue quantitative finance research.
-        </p>
-        <p>
-          I am drawn to problems where rigorous mathematical modeling meets large-scale data —
-          and to environments where the quality of an idea can be tested quickly and precisely.
-          My work spans factor research, systematic signal development, and numerical simulation.
-          You can explore my work in the <a href="#" onclick="show('projects', document.querySelectorAll('nav a')[1]);return false;"><em>Projects</em></a> section.
-        </p>
+      <img class="cat-drawing" src="assets/images/cat_drawing_00.png" alt="Cat drawing" />
 
-        <div class="link-row">
-          <a href="https://github.com/Danbi-Kim-0624" target="_blank">⌥ GitHub — Danbi-Kim-0624</a>
-          <a href="assets/PDF/Danbi_Kim_Resume.pdf" target="_blank">↗ Résumé (PDF)</a>
-          <a href="mailto:danbi@kaist.ac.kr">✉ danbi@kaist.ac.kr</a>
-          <a href="mailto:danbi.kim.0624@gmail.com">✉ danbi.kim.0624@gmail.com</a>
-        </div>
+      <a class="academics-link" href="#" onclick="show('academics', document.querySelector('[data-page-link=academics]'));return false;">
+        <img src="assets/images/Academics_hyperlink.png" alt="" />
+        <span>Academics</span>
+      </a>
+
+      <div class="link-row">
+        <a class="github-contact" href="https://github.com/Danbi-Kim-0624" target="_blank" aria-label="Github iamdanbi">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 .2a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.5c-2.2.5-2.7-.9-2.7-.9-.4-.9-.9-1.1-.9-1.1-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-3.9 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8A7.6 7.6 0 0 1 8 4.2c.7 0 1.4.1 2 .3 1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3-1.8 3.7-3.6 3.9.3.3.6.8.6 1.6v2c0 .2.1.5.6.4A8 8 0 0 0 8 .2Z"/>
+          </svg>
+          <span>Github | iamdanbi</span>
+        </a>
+        <a href="assets/PDF/Danbi_Kim_Resume.pdf" target="_blank">Resume PDF</a>
+        <a href="mailto:danbi@kaist.ac.kr">danbi@kaist.ac.kr</a>
+        <a href="mailto:danbi.kim.0624@gmail.com">danbi.kim.0624@gmail.com</a>
       </div>
+    </div>
+
+    <div class="intro-text">
+      <p>Hello, I am Danbi Kim.</p>
+      <p>
+        I am a researcher with a background in Mathematics and Aerospace Engineering from KAIST,
+        broadly interested in applied mathematics and quantitative approaches to understanding complex systems.
+        I am particularly drawn to problems where mathematical structure and real-world phenomena intersect.
+        More recently, I have developed a growing interest in statistics and statistical learning, motivated by
+        their role in extracting insight from increasingly complex and high-dimensional data.
+      </p>
+      <p>
+        For an overview of my academic work and research activities, please see
+        <a class="intro-emphasis" href="#" onclick="show('academics', document.querySelector('[data-page-link=academics]'));return false;">Academics</a>.
+        If you are interested
+        in my personal projects, experiments beyond academia, or simply who I am as a person, I invite you to
+        explore <a class="intro-emphasis" href="#" onclick="show('whoami', document.querySelector('[data-page-link=whoami]'));return false;">Who am I</a>.
+      </p>
     </div>
 
     <!-- Education -->
     <div class="section">
-      <p class="section-label">Education</p>
+      <h2 class="section-label">Education</h2>
       <ul class="entry-list">
         <li>
           <div>
-            <div class="entry-main">M.S. in Mechanical Engineering — KAIST</div>
-            <div class="entry-sub">On leave of absence to pursue quantitative finance research</div>
+            <div class="entry-main">M.S. in Mechanical Engineering (On Leave) at KAIST</div>
           </div>
-          <div class="entry-year">2025–</div>
         </li>
         <li>
           <div>
-            <div class="entry-main">B.S. in Mathematics &amp; Aerospace Engineering — KAIST</div>
-            <div class="entry-sub">GPA 3.86 / 4.3 &nbsp;·&nbsp; Magna Cum Laude &nbsp;·&nbsp; Dual degree</div>
+            <div class="entry-main">B.S. in Mathematics &amp; Aerospace Engineering at KAIST</div>
+            <div class="entry-sub">Magna Cum Laude · Dual Degree</div>
           </div>
-          <div class="entry-year">2020–2024</div>
         </li>
       </ul>
     </div>
 
     <!-- Experience -->
     <div class="section">
-      <p class="section-label">Experience</p>
+      <h2 class="section-label">Experience</h2>
       <ul class="entry-list">
         <li>
           <div>
-            <div class="entry-main">WorldQuant BRAIN — Research Consultant</div>
-            <div class="entry-sub">Alpha research on U.S. equities · Gold Level, WorldQuant Challenge · Built automated alpha simulation pipeline using the BRAIN API in Python</div>
+            <div class="entry-main">WorldQuant BRAIN | Research Consultant</div>
           </div>
-          <div class="entry-year">2026</div>
         </li>
         <li>
           <div>
-            <div class="entry-main">IQC 2026 — Participant</div>
-            <div class="entry-sub">International Quant Championship, WorldQuant · Team-based alpha development across multiple strategies</div>
+            <div class="entry-main">PwC Consulting | Research Assistant, Digital &amp; AI</div>
           </div>
-          <div class="entry-year">2026</div>
         </li>
         <li>
           <div>
-            <div class="entry-main">PwC Consulting — Research Assistant, Digital &amp; AI</div>
-            <div class="entry-sub">Refactored Confluence→Milvus VectorDB pipeline for RAG-enhanced LLM; reduced refresh time from 30 min to 2 min</div>
+            <div class="entry-main">Solid Mechanics &amp; Materials Laboratory, KAIST | Undergraduate Research Intern</div>
           </div>
-          <div class="entry-year">2025</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">Solid Mechanics &amp; Materials Lab, KAIST — Undergraduate Intern</div>
-            <div class="entry-sub">Prof. Hansohl Cho · FEM simulation of hyperelastic thin plates in Abaqus (Python) · Active particle simulation · LCE soft material mechanics</div>
-          </div>
-          <div class="entry-year">2023–2024</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">Global Navigation Satellite Systems Lab, KAIST — Undergraduate Intern</div>
-            <div class="entry-sub">Prof. Jiyun Lee · Satellite system fundamentals</div>
-          </div>
-          <div class="entry-year">Winter 2022</div>
         </li>
       </ul>
     </div>
 
     <!-- Honors -->
     <div class="section">
-      <p class="section-label">Honors &amp; Achievements</p>
+      <h2 class="section-label">Honors &amp; Achievements</h2>
       <ul class="entry-list">
         <li>
           <div>
-            <div class="entry-main">KAIST Reading King — Individual Category Champion</div>
-            <div class="entry-sub">제 4회 카이스트 독서왕 대상</div>
+            <div class="entry-main">KAIST Reading King — Individual Category Champion 제 4회 카이스트 독서왕 대상</div>
           </div>
-          <div class="entry-year">2025</div>
         </li>
         <li>
           <div>
             <div class="entry-main">KAIST Q-Day Student Special Awards — Trust &amp; Communication</div>
             <div class="entry-sub">Awarded for contributions to humanities and arts programs as the KSOP Media Team (with 정예나, 김현진)</div>
           </div>
-          <div class="entry-year">2024</div>
         </li>
         <li>
           <div>
             <div class="entry-main">KAIST Aerospace Engineering Hong Chang Sun Scholarship</div>
             <div class="entry-sub">Established for students with excellent academic records, in honor of Prof. Hong Chang Sun</div>
           </div>
-          <div class="entry-year">2023</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">KAIST National Science &amp; Technology Scholarship</div>
-            <div class="entry-sub">Full four-year tuition scholarship with monthly stipend</div>
-          </div>
-          <div class="entry-year">2020–2023</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">KAIST Reading King — Individual Category Encouragement Award</div>
-            <div class="entry-sub">제 2회 카이스트 독서왕 개인부문 장려상</div>
-          </div>
-          <div class="entry-year">2022</div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Extracurricular -->
-    <div class="section">
-      <p class="section-label">Extracurricular</p>
-      <ul class="entry-list">
-        <li>
-          <div>
-            <div class="entry-main">KAIST Swimming Team KAORI</div>
-            <div class="entry-sub">
-              Bronze medal — Backstroke 100m, 3rd Gimcheon Masters (2025) ·
-              Bronze medal — Freestyle 100m, 29th KAIST Swim Meet (2024) ·
-              5th place — Freestyle 100m, 2nd Gimcheon Masters (2024)
-            </div>
-          </div>
-          <div class="entry-year">2024–</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">KAIST Broadcast VOK (Voice of KAIST) — Announcer</div>
-            <div class="entry-sub">MC for the 35th Taewool Music Festival (2022)</div>
-          </div>
-          <div class="entry-year">2020–2022</div>
-        </li>
-        <li>
-          <div>
-            <div class="entry-main">KAIST Science Outreach Program (KSOP)</div>
-            <div class="entry-sub">Content Development (2022–2024) · Education Mentor (2022) · Operations Coordinator (2021)</div>
-          </div>
-          <div class="entry-year">2021–2024</div>
         </li>
       </ul>
     </div>
 
   </div><!-- /home -->
+
+  <div id="academics" class="page placeholder-page">
+    <p>준비중이다</p>
+  </div>
+
+  <div id="whoami" class="page placeholder-page">
+    <p>준비중이다</p>
+  </div>
 
   <!-- ══ PROJECTS ══ -->
   <div id="projects" class="page">
