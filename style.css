@@ -516,7 +516,7 @@ footer {
 
   .cat-drawing {
     left: 50%;
-    top: 0;
+    top: 10%;
     width: 258px;
     transform: translateX(-50%);
   }
@@ -536,7 +536,7 @@ footer {
   }
 
   .link-row {
-    top: 375px;
+    top: 400px;
     width: 230px;
     font-size: 0.72rem;
   }
