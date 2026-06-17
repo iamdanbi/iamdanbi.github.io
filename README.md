@@ -14,7 +14,7 @@ This website serves as a public home for my work as an independent researcher an
 - Resume and contact information
 - Visual elements that reflect my own taste, process, and way of thinking
 
-The initial visual design was created in Figma and then implemented as HTML/CSS with the help of Codex. The current codebase is simple by design, making it easy to inspect, modify, and extend without requiring a complex build system.
+**The initial visual design was created in Figma and then implemented as HTML/CSS with the help of Codex.** The current codebase is simple by design, making it easy to inspect, modify, and extend without requiring a complex build system.
 
 Google Analytics 4 is integrated for basic traffic and visitor analytics.
 
@@ -83,14 +83,12 @@ The site is designed to be hosted with GitHub Pages. Since this is a static webs
 
 No build command is required.
 
-## Reuse and Learning
-
-You are welcome to use, modify, and learn from this project. Feel free to copy parts of the structure, styling, or implementation for your own personal website or portfolio.
-
-If you adapt the code, I would appreciate attribution, especially if you reuse larger portions of the design or source structure.
-
-## License
+## Reuse & License
 
 This project is released under the MIT License.
 
-You are free to copy, modify, adapt, and reuse the code with attribution. The website content, personal writing, images, resume, and biographical information are personal materials, so please do not present them as your own.
+You are welcome to use, modify, adapt, and learn from the code in this repository. Feel free to reuse parts of the structure, styling, or implementation for your own projects, personal websites, or portfolios.
+
+The personal content of this website—including biographical information, writing, resume materials, and original images or artwork created for the site—is not intended for public redistribution or reuse as your own. If you would like to reference or share those materials, please do so respectfully and with appropriate credit.
+
+In short: the code is free to use, but the personal content belongs to its author.
